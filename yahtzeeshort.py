@@ -1,5 +1,4 @@
 import random
-
 play = 'yes'
 yn = ['y', 'n']
 
@@ -25,7 +24,7 @@ def rules(yesorno = ['yes', 'no','y','n']):
         print("A Yahtzee(5 of the same) is 50 extra points.")
         print("Good luck!")
         input("Press Enter to go back to the game..")
-        
+
 def roll():
     dye = random.randint(1,6)
     return dye
@@ -84,7 +83,6 @@ def keepdice():
             keep.append(dye)
     return keep
 
-
 def turn2():
     input("Second roll, please press Enter to roll your dice....")
     keepdice()
@@ -101,7 +99,6 @@ def score1():
     input("Press Enter to continue...")
     return score1
 
-
 def score2():
     score2 = 0
     keep.sort()
@@ -109,7 +106,7 @@ def score2():
     if len(set(keep)) == 1:
         print("Yahtzee!!! You've got 5 equal dice! That's 50 extra points!")
         score2 += 50
-    
+
     elif len(set(keep)) == 2:
         if keep[0] == keep[3] or keep[1] == keep[4]:
             print("You have four of a kind! That's 20 points extra!")
@@ -117,7 +114,7 @@ def score2():
         else:
             score2 += 25
             print("You have a full house! You've scored 25 extra points!")
-    
+
     elif len(set(keep)) == 5:
         if sum(keep) == 20:
             print("You have a high straight! That's 35 extra points!")
@@ -127,7 +124,7 @@ def score2():
             score2 += 30
         else:
             print("You have nothing, no extra points...")
-    
+
     elif len(set(keep)) == 3:
         if keep[0] == keep[2] or keep[1] == keep[3] or keep[2] == keep[4]:
             score2 += 15
@@ -135,7 +132,6 @@ def score2():
         else:
             score2 += 10
             print("You have 2 pairs! That's 10 extra points!")
-    
     else:
         score2 += 5
         print("You have one pair, that's 5 extra points!")
@@ -219,7 +215,6 @@ while play == 'yes':
     counter = 0
     try:
         players = int(input("\nHow many players? (min 1, max 3): "))
-    
         while players < 1: 
             print("Please enter a number from 1 to 3")
             players = int(input("How many players? (min 1, max 3): "))
@@ -235,10 +230,7 @@ while play == 'yes':
     except ValueError:
         print("Please enter a number from 1 to 3")
         continue    
-
-
     print("\nGreat, a",players,"Player game!\n")
-    
     try:
         rounds = int(input("Please enter how many rounds you want this game to last (min 1, max 10 rounds): "))
         while rounds < 1: 
@@ -276,7 +268,6 @@ while play == 'yes':
                     print("The dice you've kept so far:",keep)
                     turn = turn + 1
                     turn3()
-            
             print("Your final result is:",keep)
             player1score = player1score + score1()
             player1score = player1score + score2()
@@ -307,7 +298,7 @@ while play == 'yes':
                     print("The dice you've kept so far:",keep)
                     turn = turn + 1
                     turn3()
-              
+
             print("Your final result for this round is:",keep)
             player1score = player1score + score1()
             player1score = player1score + score2()
@@ -351,7 +342,7 @@ while play == 'yes':
                 input("Press Enter to start next round...")
         input("Press Enter to see who won the game")
         print("The total scores of this",rounds,"round game are Player1:",player1total,"points and Player 2:",player2total,"points.\n")
-        
+
         if player1total == player2total:
                 print("The game is a draw!!")
         elif player1total > player2total:
@@ -366,7 +357,7 @@ while play == 'yes':
             print("Player 1 sets his score first for this round.")
             turn = turn + 1
             keep = turn1()
-        
+
             if len(keep) == 5:
                 print("Wow! So you got lucky with the first roll?")
             else:
@@ -379,7 +370,7 @@ while play == 'yes':
                     print("The dice you've kept so far:",keep)
                     turn = turn + 1
                     turn3()
-              
+
             print("Your final result for this round is:",keep)
             player1score = player1score + score1()
             player1score = player1score + score2()
@@ -410,7 +401,6 @@ while play == 'yes':
             player2score = player2score + score2()
             player2total = player2total + player2score
             print("You've scored",player2score,"points!!")
-
             print("Now it's player 3's turn to set a score!")
             input("Player 3, press Enter when you are ready...")
             player3score = 0
@@ -448,11 +438,5 @@ while play == 'yes':
     play = newgame() 
 
 print("\nThank you for playing my simple take on Yahtzee, I will likely improve on this, so keep asking me for updates!")
-print("(c) Jeroen Penders 27-05-'21\n")    
-
-    
-
-    
-    
-
-
+print("I might add features like more players and a better scoring system, and maybe even some graphics in the future (When I don't suck at coding anymore).")
+print("And for coders, sorry for my unorthodox style of coding (I'm just a beginner), but it works!      (c) Jeroen Penders 17-05-'21\n")    
