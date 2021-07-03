@@ -9,6 +9,8 @@ def rules(yesorno = ['yes', 'no','y','n']):
     while rule not in yesorno:
         print("Please type yes or no (you can also type y or n)")
         rule = input("\nDo you want to see the rules of the game? yes or no? ")
+        if rule == 'yes':
+            rule = 'y'
     if rule == 'y':
         print("\nEach player has 5 dice and rolls 3 times. The first two times you can select which dice you want to keep,")
         print("the other dice will be rolled again. The dice you keep cannot be rolled again (for now, I will add that feature in the future).")
@@ -24,63 +26,63 @@ def rules(yesorno = ['yes', 'no','y','n']):
         print("A Yahtzee(5 of the same) is 50 extra points.")
         print("Good luck!")
         input("Press Enter to go back to the game..")
-
+        
 def roll():
-    dye = random.randint(1,6)
-    return dye
+    die = random.randint(1,6)
+    return die
 
 def turn1():
     keep = []
     input("First roll, please press Enter to roll your dice....")
-    dye1 = roll()
-    dye2 = roll()
-    dye3 = roll()
-    dye4 = roll()
-    dye5 = roll()
-    diceroll = [dye1,dye2,dye3,dye4,dye5]
+    die1 = roll()
+    die2 = roll()
+    die3 = roll()
+    die4 = roll()
+    die5 = roll()
+    diceroll = [die1,die2,die3,die4,die5]
     print("You've rolled:",diceroll)
-    for dye in diceroll:
-        print("Do you want to keep this dye:",dye,"? (y)es or (n)o:")
+    for die in diceroll:
+        print("Do you want to keep this die:",die,"? (y)es or (n)o:")
         yorn = input()
         while yorn not in yn:
             print("Please type y or n")
-            print("Do you want to keep this dye:",dye,"? (y)es or (n)o:")
+            print("Do you want to keep this die:",die,"? (y)es or (n)o:")
             yorn = input()
         if yorn == 'y':
-            keep.append(dye)
+            keep.append(die)
     return keep
 
 def keepdice():
     length = len(keep)
-    dye1 = roll()
-    dye2 = roll()
-    dye3 = roll()
-    dye4 = roll()
-    dye5 = roll()
+    die1 = roll()
+    die2 = roll()
+    die3 = roll()
+    die4 = roll()
+    die5 = roll()
     if length == 0:
-        diceroll = [dye1,dye2,dye3,dye4,dye5]
+        diceroll = [die1,die2,die3,die4,die5]
     elif length == 1:
-        diceroll = [dye1,dye2,dye3,dye4]
+        diceroll = [die1,die2,die3,die4]
     elif length == 2:
-        diceroll = [dye1,dye2,dye3]
+        diceroll = [die1,die2,die3]
     elif length == 3:
-        diceroll = [dye1,dye2]
+        diceroll = [die1,die2]
     elif length == 4:
-        diceroll = [dye1]
+        diceroll = [die1]
     print("You've rolled:",diceroll)
     if turn < 3:
-        for dye in diceroll:
-            print("Do you want to keep this dye:",dye,"? (y)es or (n)o:") 
+        for die in diceroll:
+            print("Do you want to keep this die:",die,"? (y)es or (n)o:") 
             yorn = input()
             while yorn not in yn:
                 print("Please type y or n")
-                print("Do you want to keep this dye:",dye,"? (y)es or (n)o:")
+                print("Do you want to keep this die:",die,"? (y)es or (n)o:")
                 yorn = input()
             if yorn == 'y':
-                keep.append(dye)
+                keep.append(die)
     else:
-        for dye in diceroll:
-            keep.append(dye)
+        for die in diceroll:
+            keep.append(die)
     return keep
 
 def turn2():
@@ -106,7 +108,7 @@ def score2():
     if len(set(keep)) == 1:
         print("Yahtzee!!! You've got 5 equal dice! That's 50 extra points!")
         score2 += 50
-
+    
     elif len(set(keep)) == 2:
         if keep[0] == keep[3] or keep[1] == keep[4]:
             print("You have four of a kind! That's 20 points extra!")
@@ -114,7 +116,7 @@ def score2():
         else:
             score2 += 25
             print("You have a full house! You've scored 25 extra points!")
-
+    
     elif len(set(keep)) == 5:
         if sum(keep) == 20:
             print("You have a high straight! That's 35 extra points!")
@@ -124,7 +126,7 @@ def score2():
             score2 += 30
         else:
             print("You have nothing, no extra points...")
-
+    
     elif len(set(keep)) == 3:
         if keep[0] == keep[2] or keep[1] == keep[3] or keep[2] == keep[4]:
             score2 += 15
@@ -132,6 +134,7 @@ def score2():
         else:
             score2 += 10
             print("You have 2 pairs! That's 10 extra points!")
+    
     else:
         score2 += 5
         print("You have one pair, that's 5 extra points!")
@@ -215,6 +218,7 @@ while play == 'yes':
     counter = 0
     try:
         players = int(input("\nHow many players? (min 1, max 3): "))
+    
         while players < 1: 
             print("Please enter a number from 1 to 3")
             players = int(input("How many players? (min 1, max 3): "))
@@ -230,7 +234,9 @@ while play == 'yes':
     except ValueError:
         print("Please enter a number from 1 to 3")
         continue    
+
     print("\nGreat, a",players,"Player game!\n")
+    
     try:
         rounds = int(input("Please enter how many rounds you want this game to last (min 1, max 10 rounds): "))
         while rounds < 1: 
@@ -268,6 +274,7 @@ while play == 'yes':
                     print("The dice you've kept so far:",keep)
                     turn = turn + 1
                     turn3()
+            
             print("Your final result is:",keep)
             player1score = player1score + score1()
             player1score = player1score + score2()
@@ -298,7 +305,7 @@ while play == 'yes':
                     print("The dice you've kept so far:",keep)
                     turn = turn + 1
                     turn3()
-
+              
             print("Your final result for this round is:",keep)
             player1score = player1score + score1()
             player1score = player1score + score2()
@@ -342,7 +349,7 @@ while play == 'yes':
                 input("Press Enter to start next round...")
         input("Press Enter to see who won the game")
         print("The total scores of this",rounds,"round game are Player1:",player1total,"points and Player 2:",player2total,"points.\n")
-
+        
         if player1total == player2total:
                 print("The game is a draw!!")
         elif player1total > player2total:
@@ -357,7 +364,7 @@ while play == 'yes':
             print("Player 1 sets his score first for this round.")
             turn = turn + 1
             keep = turn1()
-
+        
             if len(keep) == 5:
                 print("Wow! So you got lucky with the first roll?")
             else:
@@ -370,7 +377,7 @@ while play == 'yes':
                     print("The dice you've kept so far:",keep)
                     turn = turn + 1
                     turn3()
-
+              
             print("Your final result for this round is:",keep)
             player1score = player1score + score1()
             player1score = player1score + score2()
@@ -401,6 +408,7 @@ while play == 'yes':
             player2score = player2score + score2()
             player2total = player2total + player2score
             print("You've scored",player2score,"points!!")
+
             print("Now it's player 3's turn to set a score!")
             input("Player 3, press Enter when you are ready...")
             player3score = 0
@@ -440,3 +448,10 @@ while play == 'yes':
 print("\nThank you for playing my simple take on Yahtzee, I will likely improve on this, so keep asking me for updates!")
 print("I might add features like more players and a better scoring system, and maybe even some graphics in the future (When I don't suck at coding anymore).")
 print("And for coders, sorry for my unorthodox style of coding (I'm just a beginner), but it works!      (c) Jeroen Penders 17-05-'21\n")    
+
+    
+
+    
+    
+
+
